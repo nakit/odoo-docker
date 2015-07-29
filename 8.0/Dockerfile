@@ -1,5 +1,5 @@
 FROM debian:jessie
-MAINTAINER Odoo S.A. <info@odoo.com>
+MAINTAINER Nakit.com.br <odoo@nakit.com.br>
 
 # Install some deps, lessc and less-plugin-clean-css, and wkhtmltopdf
 RUN set -x; \
@@ -11,6 +11,8 @@ RUN set -x; \
             npm \
             python-support \
             python-pyinotify \
+	    python-pip \
+	    git-core \
         && npm install -g less less-plugin-clean-css \
         && ln -s /usr/bin/nodejs /usr/bin/node \
         && curl -o wkhtmltox.deb -SL http://nightly.odoo.com/extra/wkhtmltox-0.12.1.2_linux-jessie-amd64.deb \
@@ -29,6 +31,16 @@ RUN set -x; \
         && apt-get update \
         && apt-get -y install -f --no-install-recommends \
         && rm -rf /var/lib/apt/lists/* odoo.deb
+
+# Install odoo-magento connector
+RUN cd /mnt/extra-addons \
+	&& git clone https://github.com/OCA/connector.git -b 8.0 \
+	&& git clone https://github.com/OCA/connector-ecommerce.git -b 8.0 \
+	&& git clone https://github.com/OCA/connector-magento.git -b 8.0 \
+	&& git clone https://github.com/OCA/e-commerce.git -b 8.0 \
+	&& git clone https://github.com/OCA/product-attribute.git -b 8.0 \
+	&& git clone https://github.com/OCA/sale-workflow.git -b 8.0 \
+	&& pip install magento
 
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /
