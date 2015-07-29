@@ -33,7 +33,8 @@ RUN set -x; \
         && rm -rf /var/lib/apt/lists/* odoo.deb
 
 # Install odoo-magento connector
-RUN cd /mnt/extra-addons \
+RUN mkdir /mnt/extra-addons \
+	&& cd /mnt/extra-addons \
 	&& git clone https://github.com/OCA/connector.git -b 8.0 \
 	&& git clone https://github.com/OCA/connector-ecommerce.git -b 8.0 \
 	&& git clone https://github.com/OCA/connector-magento.git -b 8.0 \
