@@ -10,6 +10,8 @@ This container requires a postgres container linked as `db` to run. For example:
 docker run --name postgresdb --env POSTGRES_USER=odoo --env POSTGRES_PASSWORD=odoo --detach postgres
 ```
 
+Note: changing `POSTGRES_USER` and `POSTGRES_PASSWORD` to something more secure is recommended.
+
 ## Building this container
 
 ```
