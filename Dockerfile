@@ -30,7 +30,8 @@ RUN set -x; \
     curl https://nightly.odoo.com/odoo.key | apt-key add - && \
     echo "deb http://nightly.odoo.com/8.0/nightly/deb/ ./" >> /etc/apt/sources.list && \
     apt-get update && \
-    apt-get install odoo
+    apt-get install -y --no-install-recommends --no-install-suggests \
+        odoo
 
 # Install odoo-magento connector
 RUN cd /usr/lib/python2.7/dist-packages/openerp/addons && \
