@@ -17,7 +17,7 @@ RUN set -x; \
     npm install -g less less-plugin-clean-css && \
     ln -s /usr/bin/nodejs /usr/bin/node && \
     cd /tmp && \
-    curl -o wkhtmltox.deb -SL http://nightly.odoo.com/extra/wkhtmltox-0.12.1.2_linux-jessie-amd64.deb  && \
+    curl -o wkhtmltox.deb -SL http://nightly.odoo.com/extra/wkhtmltox-0.12.1.2_linux-jessie-amd64.deb && \
     echo '40e8b906de658a2221b15e4e8cd82565a47d7ee8 wkhtmltox.deb' | sha1sum -c - && \
     dpkg --force-depends -i wkhtmltox.deb && \
     apt-get -y install -f --no-install-recommends --no-install-suggests && \
@@ -27,7 +27,7 @@ RUN set -x; \
 
 # Install Odoo
 RUN set -x; \
-    wget -O - https://nightly.odoo.com/odoo.key | apt-key add - && \
+    curl https://nightly.odoo.com/odoo.key | apt-key add - && \
     echo "deb http://nightly.odoo.com/8.0/nightly/deb/ ./" >> /etc/apt/sources.list && \
     apt-get update && \
     apt-get install odoo \
