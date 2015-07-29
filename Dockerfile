@@ -35,66 +35,19 @@ RUN set -x; \
     apt-get install -y --no-install-recommends --no-install-suggests odoo
 
 # Install odoo-magento connector
-RUN mkdir -p /tmp/addons && \
-    cd /tmp/addons && \
-    pip install magento && \
+RUN pip install magento && \
+    mkdir -p /var/lib/oca && \
+    cd /var/lib/oca && \
     git clone https://github.com/OCA/account-closing.git -b 8.0 && \
-    mv  account-closing/account_* \
-        /usr/lib/python2.7/dist-packages/openerp/addons && \
     git clone https://github.com/OCA/connector.git -b 8.0 && \
-    mv  connector/connector* \
-        /usr/lib/python2.7/dist-packages/openerp/addons && \
     git clone https://github.com/OCA/connector-ecommerce.git -b 8.0 && \
-    mv  connector-ecommerce/connector_ecommerce \
-        /usr/lib/python2.7/dist-packages/openerp/addons && \
     git clone https://github.com/OCA/connector-magento.git -b 8.0 && \
-    mv  connector-magento/customize_example \
-        connector-magento/magentoerpconnect \
-        /usr/lib/python2.7/dist-packages/openerp/addons && \
     git clone https://github.com/OCA/e-commerce.git -b 8.0 && \
-    mv  e-commerce/product_links \
-        e-commerce/sale_* \
-        /usr/lib/python2.7/dist-packages/openerp/addons && \
     git clone https://github.com/OCA/product-attribute.git -b 8.0 && \
-    mv  product-attribute/product_* \
-        /usr/lib/python2.7/dist-packages/openerp/addons && \
     git clone https://github.com/OCA/sale-workflow.git -b 8.0 && \
-    mv  sale-workflow/partner_prepayment \
-        sale-workflow/sale_* \
-        /usr/lib/python2.7/dist-packages/openerp/addons && \
     git clone https://github.com/OCA/server-tools.git -b 8.0 && \
-    mv  server-tools/admin_technical_features \
-        server-tools/auditlog \
-        server-tools/auth_* \
-        server-tools/base_* \
-        server-tools/cron_run_manually \
-        server-tools/database_cleanup \
-        server-tools/dbfilter_from_header \
-        server-tools/disable_openerp_online \
-        server-tools/fetchmail_attach_from_folder \
-        server-tools/import_odbc \
-        server-tools/language_path_mixin \
-        server-tools/mail_environment \
-        server-tools/mass_editing \
-        server-tools/qweb_usertime \
-        server-tools/scheduler_error_mailer \
-        server-tools/server_* \
-        server-tools/shell \
-        server-tools/super_calendar \
-        server-tools/users_* \
-        server-tools/web_context_tunnel \
-        /usr/lib/python2.7/dist-packages/openerp/addons && \
     git clone https://github.com/OCA/stock-logistics-transport.git -b 8.0 && \
-    mv  stock-logistics-transport/purchase_* \
-        stock-logistics-transport/sale_* \
-        stock-logistics-transport/stock_* \
-        stock-logistics-transport/transport_* \
-        /usr/lib/python2.7/dist-packages/openerp/addons && \
-    git clone https://github.com/OCA/stock-logistics-workflow.git -b 8.0 && \
-    mv  stock-logistics-workflow/picking_dispatch \
-        stock-logistics-workflow/stock_* \
-        /usr/lib/python2.7/dist-packages/openerp/addons && \
-    rm -fr /tmp/addons
+    git clone https://github.com/OCA/stock-logistics-workflow.git -b 8.0
 
 # Cleanup
 RUN set -x; \
